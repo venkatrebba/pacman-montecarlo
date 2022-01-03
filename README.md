@@ -1,6 +1,6 @@
 # pacman-montecarlo
 
-How to run Monte Carlo Tree Search:
+Running steps:
 
 cd ./multiagent
 
