@@ -343,6 +343,7 @@ class PacmanGameTreeTest(testClasses.TestCase):
         lay = layout.Layout([l.strip() for l in self.layout_text.split('\n')])
         pac = GradingAgent(self.seed, studentAgent, allActions,
                            altDepthActions, partialPlyBugActions)
+        
         # check return codes and assign grades
         disp = self.question.getDisplay()
         stats = run(lay, self.layout_name, pac, [DirectionalGhost(
@@ -446,7 +447,7 @@ class GraphGameTreeTest(testClasses.TestCase):
             self.addMessage('    Student generated nodes: %s\n    Correct generated nodes: %s' % (
                 generated, goldGenerated))
             fail = True
-
+        
         if fail:
             self.addDiagram()
             return self.testFail(grades)
@@ -520,6 +521,24 @@ class EvalAgentTest(testClasses.TestCase):
         averageScore = sum(stats['scores']) / float(len(stats['scores']))
         nonTimeouts = self.numGames - stats['timeouts']
         wins = stats['wins']
+        
+        #added for Team project
+        #average time
+        print("Average Time : " + str(totalTime/len(games)))
+        #average nodes 
+        if len(agent.number_of_nodes) > 0:
+            average_nodes = sum(agent.number_of_nodes)/len(agent.number_of_nodes)
+            print("Average Nodes : " + str(average_nodes))
+        #average tree depth
+        if len(agent.depth_of_tree) > 0:
+            average_depth = sum(agent.depth_of_tree)/len(agent.depth_of_tree)
+            print("Average Tree Depth : " + str(average_depth))
+        #average time per move
+        if len(agent.time_per_moves) > 0:
+            average_time_per_move = sum(agent.time_per_moves)/len(agent.time_per_moves)
+            print("Average Time Per Move : " + str(average_time_per_move))
+        
+            
 
         def gradeThreshold(value, minimum, thresholds, name):
             points = 0
